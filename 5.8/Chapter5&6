@@ -1,0 +1,228 @@
+1.	答案：
+def message():
+    myStr = input("请输入密码，只能为字母和数字：")
+    if myStr.isalnum():
+        print("符合要求")
+    else:
+        print("不符合要求")
+2.	答案：
+arr = []
+evenStr = ""
+oddStr = ""
+message = input("请输入任意字符串：")
+for string in message:
+    arr.append(string)
+for eStr in (arr[::2]):
+    evenStr = evenStr+eStr
+for oStr in (arr[1::2]):
+    oddStr = oddStr+oStr
+print(evenStr+oddStr)
+3.	答案：
+arr = []
+def count():
+    myStr = input("请输入只包含字母的字符串：")
+    if myStr.isalpha():
+        newStr = myStr.lower()
+        for string in newStr:
+            arr.append(string)
+        a = {}
+        for i in arr:
+            if arr.count(i) >= 1:
+                a[i] = arr.count(i)
+        print(a)
+    else:
+        print("输入的内容有误")
+count()
+4.	答案：
+arr = []
+result = ""
+myStr = input("请输入字符串：")
+for string in myStr:
+    arr.append(string)
+last = arr[-1]
+arr.remove(last)
+arr.insert(0,last)
+for new in arr:
+    result = result + new
+print(result)
+5.	答案：
+arr = []
+length = int(input("请要输入数字的总个数（必须为奇数）:"))
+i = 0
+while i < length:
+   num =  int(input("输入第%d个数字:"%(i+1)))
+   arr.append(num)
+   i+=1
+arr.sort()
+index = int(length/2)
+print(arr[index])
+6.	答案：
+第一种：
+arr = [1,2,3,4,5]
+arr.reverse()
+print(arr)
+第二种：
+arr = [1,2,3,4,5]
+arr.sort(reverse=True)
+print(arr)
+7.	答案：
+arr = []
+length = int(input("请输入数字的总个数:"))
+i = 0
+while i < length:
+   num =  int(input("输入第%d个数字:"%(i+1)))
+   arr.append(num)
+   i+=1
+print("排序前：%s"%arr)
+# 对列表排序
+for i in range(length):
+    flag = 0
+    for j in range(1,length):
+        if arr[j-1] > arr[j]:
+            arr[j-1],arr[j] = arr[j],arr[j-1]
+            flag = 1
+    if not flag:
+        break
+print("排序后：%s"%arr)
+8.	答案：
+arr = []
+length = int(input("请输入列表的总个数:"))
+i = 0
+while i < length:
+   element =  input("输入第%d个元素:"%(i+1))
+   arr.append(element)
+   i+=1
+# 列表转为集合
+newList = set(arr)
+print(newList)
+9.	答案：
+def add(a, b):
+    # 下面两行保证输入的a和b是维数相同的矩阵，根据实际情况不要也可以
+    assert (len(a) == len(b))
+    assert (all([len(a[i]) == len(b[i]) == len(a[0]) for i in range(len(a))]))
+    i, j = len(a), len(a[0])
+    c = [[0] * j] * i
+    for m in range(i):
+        for n in range(j):
+            c[m][n] = a[m][n] + b[m][n]
+    return c
+a = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+b = [[9, 8, 7], [6, 5, 4], [3, 2, 1]]
+c = add(a, b)
+print(c)
+10.	答案：
+dic = {}
+i=0
+while i<3:
+     number = input("输入学生学号：")
+     name = input("输入学生姓名：")
+     dic.__setitem__(number,name)
+     i+=1
+print("排序前：%s"%dic)
+def dict2list(dic:dict):
+    ''' 将字典转化为列表 '''
+    keys = dic.keys()
+    vals = dic.values()
+    lst = [(key, val) for key, val in zip(keys, vals)]
+    return lst
+new = sorted(dict2list(dic), key=lambda x:x[0], reverse=False)
+print("排序后：%s"%new)
+11.	答案：
+def delMale(dict):
+    keys = []
+    values = []
+    for (key,value) in dict.items():
+        keys.append(key)
+        values.append(value)
+    for value in values:
+        if value == 0:
+            index = values.index(value)
+            arrKey = keys[index]
+            del dict[arrKey]
+            values[index] = 3
+            keys[index] = "占位"
+dic = {"小明":0, "小红":1,"小兰":1,"小白":0}
+print("删除前：%s"%dic)
+delMale(dic)
+print("删除后：%s"%dic)
+12.	答案：
+arr = [12,3,37,7,91,67,27,45,6]
+def delPrime(arr):
+    for element in arr:
+        # 质数大于 1
+        if element > 1:
+            # 查看因子
+            for i in range(2, element):
+                if (element % i) == 0:
+                    break
+            else:
+                arr.remove(element)
+delPrime(arr)
+print(arr)
+
+
+Chapter6
+
+1.	答案：
+def getMax():
+    num1 = int(input("请输入第1个整数："))
+    num2 = int(input("请输入第2个整数："))
+    num3 = int(input("请输入第3个整数："))
+    temp = 0 # 临时变量，存放中间产生的第2大数值
+    if num1 > num2:
+        temp = num1
+    else:
+        temp = num2
+    if temp>num3:
+        return "其中最大值为："+ str(temp)
+    else:
+        return "其中最大值为："+ str(num3)
+maxValue = getMax()
+print(maxValue)
+2.	答案：
+def sum(n):
+    res = 0
+    while n >= 1:
+        if n%2 == 0:
+            res -= 1.0/(n*(n+1))
+        else:
+            res += 1.0/(n*(n+1))
+        n-=1
+    return res
+num = int(input("请输入一个整数："))
+print(sum(num))
+3.	答案：
+def is_palindrome(n):
+    n=str(n)
+    m=n[::-1]
+    return n==m
+result = is_palindrome(1247321)
+print(result)
+4.	答案
+def sjx(a, b, c):
+    if (a + b > c and a + c > b and b + c > a):
+        return "能构成三角形"
+    else:
+        return "不能构成三角形"
+result1 = sjx(3, 4, 5)
+print(result1)
+result2 = sjx(1, 1, 2)
+print(result2)
+5.	答案：
+# 定义函数
+def lcm(x, y):
+   #  获取最大的数
+   if x > y:
+       greater = x
+   else:
+       greater = y
+   while(True):
+       if((greater % x == 0) and (greater % y == 0)):
+           lcm = greater
+           break
+       greater += 1
+   return lcm
+# 获取用户输入
+num1 = int(input("输入第一个数字: "))
+num2 = int(input("输入第二个数字: "))
+print( num1,"和", num2,"的最小公倍数为", lcm(num1, num2))
