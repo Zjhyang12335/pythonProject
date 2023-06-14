@@ -1,0 +1,159 @@
+这里有四个数字，分别是：1、2、3、4 能组成多少个互不相同且无重复数字的三位数？各是多少？
+for i in range(1, 5):
+ for j in range(1, 5):
+ for k in range(1, 5):
+ if (i != k) and (i != j) and (j != k):
+ print(i, j, k)
+
+ 学习成绩>=90分的同学用A表示，60-89分之间的用B表示，60分以下的用C表示。
+
+Python解题思路分析：(a>b) a:b这是条件运算符的基本例子。
+
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+score = int(input('input score:\n'))
+if score >= 90:
+    grade = 'A'
+elif score >= 60:
+    grade = 'B'
+else:
+    grade = 'C'
+
+print('%d belongs to %s' % (score, grade))
+
+ 求这样的一组数据和，s=a+aa+aaa+aaaa+aa...a的值，其中a是一个数字； 例如：2+22+222+2222+22222(此时共有5个数相加)，这里具体是由几个数相加，由键盘控制。
+
+Python解题思路分析：关键是计算出每一项的值。 python解题源代码如下：
+
+# !/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+a = int(input('请输入数字 a：'))
+count = int(input('请输入几个数相加：'))
+
+res = 0 # 初始化最终求解
+for i in range(1, count + 1): # 循环次数与输入的值一样，但从1开始循环
+    t = 0 # 临时用的变量
+ for j in range(i):
+        t = t + 10 ** j  # 先计算 10**0 + 10**1 + ... + 10**j
+    res = res + (a * t) # 再计算 a * t
+print(res)
+
+
+提问：将一个列表的数据复制到另一个列表中。 
+
+请仔细看要求，这里要求的是复制数据到一个新的列表中。 Python列表数据复制，Python解题思路分析：可以了解下[ ：]的含义 python解题源代码如下：
+
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+x = [1, 2, 3]
+y = x[:]
+print(y)
+
+
+整数顺序排列问题简述：任意三个整数类型，x、y、z 
+
+提问：要求把这三个数，按照由小到大的顺序输出 Python解题思路分析：
+
+首先，要想方法把最小的数放到x位上，之后将x与y进行比较； 如果x>y的话，就将x与y的值进行交换； 然后再用x与z进行比较，如果x>z则将x与z的值进行交换，这样能使x最小。 Python整数顺序排列，python解题源代码如下：
+
+# !/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+l = []
+for i in range(3):
+    x = int(input('integer:\n'))
+    l.append(x)
+l.sort()
+print(l)
+
+
+简述：一个整数，它加上100和加上268后都是一个完全平方数 
+
+提问：请问该数是多少？ Python解题思路分析：在10000以内判断，将该数加上100后再开方，加上268后再开方，如果开方后的结果满足如下条件，即是结果。 Python完全平方数，python解题源代码如下：
+
+# !/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+import math
+for i in range(10000):
+#转化为整型值
+    x = int(math.sqrt(i + 100))
+    y = int(math.sqrt(i + 268))
+ if(x * x == i + 100) and (y * y == i + 268):
+ print (i)
+
+
+斐波那契数列（Fibonacci sequence），又称黄金分割数列、因数学家列昂纳多·斐波那契以兔子繁殖为例子而引入，故又称为“兔子数列”，指的是这样一个数列：1、1、2、3、5、8、13、21、34、在数学上，斐波纳契数列以如下被以递归的方法定义。
+
+F0 = 0 (n=0)
+F1 = 1 (n=1)
+Fn = F[n-1]+F[n-2](n=>2)
+
+
+
+
+要求一：输出第10个斐波那契数列 
+
+方法一：
+
+def fib(n):
+    a,b = 1,1
+ for i in range(n-1):
+        a,b = b,a+b
+ return a
+
+ 方法二：使用递归方法来解救这个问题。
+
+def fib(n):
+ if n==1 or n==2:
+ return 1
+ return fib(n-1)+fib(n-2)
+
+结果为55，这里就先不演示了。
+
+要求二：问题的要求改为：需要输出指定个数的斐波那契数列，要怎么来解决呢？我们往下看。
+
+def fib(n):
+ if n == 1:
+ return [1]
+ if n == 2:
+ return [1, 1]
+    fibs = [1, 1]
+ for i in range(2, n):
+        fibs.append(fibs[-1] + fibs[-2])
+ return fibs
+
+
+Python素数计算输出，编程练习题实例十二
+
+简述：区间范围101-200 
+
+要求：判断这个区间内有多少个素数，并逐一输出。
+
+Python解题思路分析：首先，判断这个数是否是素数，方法：用一个数分别去除2到sqrt(这个数)； 其结果，能被整除，则表明此数不是素数，反之是素数。
+
+# !/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+h = 0
+leap = 1
+from math import sqrt
+from sys import stdout
+
+for m in range(101, 201):
+    k = int(sqrt(m + 1))
+ for i in range(2, k + 1):
+ if m % i == 0:
+            leap = 0
+ break
+ if leap == 1:
+ print("%-4d" % m)
+        h += 1
+ if h % 10 == 0:
+ print("")
+    leap = 1
+print('The total is %d' % h)
+
